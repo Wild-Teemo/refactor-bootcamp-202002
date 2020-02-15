@@ -34,4 +34,14 @@ public class FibonacciTest {
     //then
     Assert.assertEquals(2, result);
   }
+
+  @Test
+  public void should_return_55_when_calculate_fibonacci_given_position_is_10() {
+    //when
+    Fibonacci fibonacci = new Fibonacci();
+    //given
+    long result = fibonacci.calculate(10);
+    //then
+    Assert.assertEquals(55, result);
+  }
 }
