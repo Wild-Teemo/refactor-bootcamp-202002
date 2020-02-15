@@ -56,4 +56,15 @@ public class FibonacciTest {
       fibonacci.calculate(0);
     });
   }
+
+  @Test
+  public void should_throw_exception_when_calculate_fibonacci_given_position_is_less_than_0() {
+    //when
+    Fibonacci fibonacci = new Fibonacci();
+    //given
+    //then
+    assertThrows(RuntimeException.class,()->{
+      fibonacci.calculate(-3);
+    });
+  }
 }
