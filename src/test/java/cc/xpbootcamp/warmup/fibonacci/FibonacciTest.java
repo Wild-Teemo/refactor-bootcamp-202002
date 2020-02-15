@@ -2,6 +2,7 @@ package cc.xpbootcamp.warmup.fibonacci;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FibonacciTest {
 
@@ -43,5 +44,16 @@ public class FibonacciTest {
     long result = fibonacci.calculate(10);
     //then
     Assert.assertEquals(55, result);
+  }
+
+  @Test
+  public void should_throw_exception_when_calculate_fibonacci_given_position_is_0() {
+    //when
+    Fibonacci fibonacci = new Fibonacci();
+    //given
+    //then
+    assertThrows(RuntimeException.class,()->{
+      fibonacci.calculate(0);
+    });
   }
 }
