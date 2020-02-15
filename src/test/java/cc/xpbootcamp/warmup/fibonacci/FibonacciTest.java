@@ -12,6 +12,16 @@ public class FibonacciTest {
     //given
     long result = fibonacci.calculate(1);
     //then
-    Assert.assertEquals(1,result );
+    Assert.assertEquals(1, result);
+  }
+
+  @Test
+  public void should_return_1_when_calculate_fibonacci_given_position_is_2() {
+    //when
+    Fibonacci fibonacci = new Fibonacci();
+    //given
+    long result = fibonacci.calculate(2);
+    //then
+    Assert.assertEquals(1, result);
   }
 }
