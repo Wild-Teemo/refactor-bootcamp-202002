@@ -9,7 +9,7 @@ public class Fibonacci {
     } else if (position > 2) {
       return calculate(position - 1) + calculate(position - 2);
     } else {
-      throw new RuntimeException();
+      throw new IllegalPositionException();
     }
   }
 

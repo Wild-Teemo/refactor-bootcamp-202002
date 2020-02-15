@@ -52,7 +52,7 @@ public class FibonacciTest {
     Fibonacci fibonacci = new Fibonacci();
     //given
     //then
-    assertThrows(RuntimeException.class,()->{
+    assertThrows(IllegalPositionException.class,()->{
       fibonacci.calculate(0);
     });
   }
@@ -63,7 +63,7 @@ public class FibonacciTest {
     Fibonacci fibonacci = new Fibonacci();
     //given
     //then
-    assertThrows(RuntimeException.class,()->{
+    assertThrows(IllegalPositionException.class,()->{
       fibonacci.calculate(-3);
     });
   }
