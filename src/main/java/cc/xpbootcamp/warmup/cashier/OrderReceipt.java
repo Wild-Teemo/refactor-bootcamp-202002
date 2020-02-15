@@ -10,7 +10,7 @@ public class OrderReceipt {
   private Order order;
   private final double TAXRATE = .10;
   double totalSaleTax = 0d;
-  double totalPrice = 0d;
+  double totalAmount = 0d;
 
   public OrderReceipt(Order order) {
     this.order = order;
@@ -53,7 +53,7 @@ public class OrderReceipt {
       totalSaleTax += salesTax;
 
       // calculate total amount of lineItem = price * quantity + 10 % sales tax
-      totalPrice += calculateTotalPrice(lineItem, salesTax);
+      totalAmount += calculateTotalPrice(lineItem, salesTax);
 
       printStateTax(output);
       printTotalAmount(output);
@@ -62,7 +62,7 @@ public class OrderReceipt {
   }
 
   private void printTotalAmount(StringBuilder output) {
-    output.append("Total Amount").append('\t').append(totalPrice);
+    output.append("Total Amount").append('\t').append(totalAmount);
   }
 
   private void printStateTax(StringBuilder output) {
