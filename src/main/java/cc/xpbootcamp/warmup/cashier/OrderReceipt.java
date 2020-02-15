@@ -9,6 +9,8 @@ public class OrderReceipt {
 
   private Order order;
   private final double TAXRATE = .10;
+  double totalSaleTax = 0d;
+  double totalPrice = 0d;
 
   public OrderReceipt(Order order) {
     this.order = order;
@@ -18,7 +20,6 @@ public class OrderReceipt {
     StringBuilder output = new StringBuilder();
 
     printHeader(output);
-
     // print date, bill no, customer name
 //        output.append("Date - " + order.getDate();
     printCustomerInfo(output);
@@ -37,9 +38,6 @@ public class OrderReceipt {
   }
 
   private void printLineItems(StringBuilder output) {
-    // prints lineItems
-    double totalSaleTax = 0d;
-    double totalPrice = 0d;
     for (LineItem lineItem : order.getLineItems()) {
       output.append(lineItem.getDescription());
       output.append('\t');
@@ -51,19 +49,33 @@ public class OrderReceipt {
       output.append('\n');
 
       // calculate sales tax @ rate of 10%
-      double salesTax = lineItem.totalAmount() * TAXRATE;
+      double salesTax = calculateSalesTax(lineItem);
       totalSaleTax += salesTax;
 
       // calculate total amount of lineItem = price * quantity + 10 % sales tax
-      totalPrice += lineItem.totalAmount() + salesTax;
+      totalPrice += calculateTotalPrice(lineItem, salesTax);
 
-      // prints the state tax
-      output.append("Sales Tax").append('\t').append(totalSaleTax);
-
-      // print total amount
-      output.append("Total Amount").append('\t').append(totalPrice);
+      printStateTax(output);
+      printTotalAmount(output);
 
     }
   }
+
+  private void printTotalAmount(StringBuilder output) {
+    output.append("Total Amount").append('\t').append(totalPrice);
+  }
+
+  private void printStateTax(StringBuilder output) {
+    output.append("Sales Tax").append('\t').append(totalSaleTax);
+  }
+
+  private double calculateTotalPrice(LineItem lineItem, double salesTax) {
+    return lineItem.totalAmount() + salesTax;
+  }
+
+  private double calculateSalesTax(LineItem lineItem) {
+    return lineItem.totalAmount() * TAXRATE;
+  }
+
 
 }
