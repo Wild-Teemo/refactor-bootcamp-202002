@@ -37,11 +37,11 @@ public class OrderReceipt {
 
   private String getLineItems() {
     return order.getLineItems().stream()
-        .map(this::getOrderItemDetail)
+        .map(this::getLineItemDetail)
         .collect(Collectors.joining(""));
   }
 
-  private String getOrderItemDetail(LineItem lineItem) {
+  private String getLineItemDetail(LineItem lineItem) {
     return lineItem.getDescription() + ", "
         + priceFormatter.format(lineItem.getPrice()) + " x "
         + lineItem.getQuantity() + ", "
