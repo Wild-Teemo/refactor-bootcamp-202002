@@ -21,13 +21,13 @@ class OrderReceiptTest {
     //when
     String output = receipt.printReceipt();
     String exceptResult =
-        "===== 老王超市，值得信赖 =====\n\n"
-            + "2020年2月18日,星期二\n\n"
-            + "巧克力,21.5x2,43.0\n"
-            + "小白菜,10.0x1,10.0\n"
+        "===== 老王超市, 值得信赖 =====\n\n"
+            + "2020年2月18日, 星期二\n\n"
+            + "巧克力, 21.5 x 2, 43.0\n"
+            + "小白菜, 10.0 x 1, 10.0\n"
             + "----------------------\n"
-            + "税额:5.30\n"
-            + "总价:58.30\n";
+            + "税额: 5.30\n"
+            + "总价: 58.30\n";
 
     //then
     assertEquals(exceptResult, output);
@@ -45,14 +45,14 @@ class OrderReceiptTest {
     //when
     String output = receipt.printReceipt();
     String exceptResult =
-        "===== 老王超市，值得信赖 =====\n\n"
-            + "2020年2月19日,星期三\n\n"
-            + "巧克力,21.5x2,43.0\n"
-            + "小白菜,10.0x1,10.0\n"
+        "===== 老王超市, 值得信赖 =====\n\n"
+            + "2020年2月19日, 星期三\n\n"
+            + "巧克力, 21.5 x 2, 43.0\n"
+            + "小白菜, 10.0 x 1, 10.0\n"
             + "----------------------\n"
-            + "税额:5.30\n"
-            + "折扣:1.17\n"
-            + "总价:57.13\n";
+            + "税额: 5.30\n"
+            + "折扣: 1.17\n"
+            + "总价: 57.13\n";
 
     //then
     assertEquals(exceptResult, output);

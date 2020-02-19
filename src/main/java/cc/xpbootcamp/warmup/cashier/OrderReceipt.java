@@ -3,6 +3,7 @@ package cc.xpbootcamp.warmup.cashier;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * OrderReceipt prints the details of order including customer name, address, description, quantity,
@@ -19,47 +20,44 @@ public class OrderReceipt {
 
   public String printReceipt() {
     StringBuilder output = new StringBuilder();
-    printHeader(output);
-    printLineItems(output);
+    output.append(getHeader());
+    output.append(getLineItems());
     output.append("----------------------\n");
-    printSaleTax(output);
-    printDiscount(output);
-    printTotalAmount(output);
+    output.append(getSaleTax());
+    output.append(getDiscount());
+    output.append(getTotalAmount());
     return output.toString();
   }
 
-  private void printHeader(StringBuilder output) {
-    output.append("===== 老王超市，值得信赖 =====\n\n");
-    output.append(DateTimeFormatter.ofPattern("yyyy年M月d日,EEEE", Locale.CHINA).format(order.getCreateDate())).append("\n\n");
+  private String getHeader() {
+    return "===== 老王超市, 值得信赖 =====\n\n" + DateTimeFormatter
+        .ofPattern("yyyy年M月d日, EEEE", Locale.CHINA).format(order.getCreateDate()) + "\n\n";
   }
 
-  private void printLineItems(StringBuilder output) {
-    for (LineItem lineItem : order.getLineItems()) {
-      output.append(lineItem.getDescription());
-      output.append(',');
-      output.append(lineItem.getPrice());
-      output.append('x');
-      output.append(lineItem.getQuantity());
-      output.append(',');
-      output.append(lineItem.getTotalAmount());
-      output.append('\n');
-    }
+  private String getLineItems() {
+    return order.getLineItems().stream()
+        .map(this::getOrderItemDetail)
+        .collect(Collectors.joining(""));
   }
 
-  private void printTotalAmount(StringBuilder output) {
-    output.append("总价").append(':').append(new DecimalFormat("#.00").format(order.getTotalAmount())).append("\n");
+  private String getOrderItemDetail(LineItem lineItem) {
+    return lineItem.getDescription() + ", "
+        + lineItem.getPrice() + " x "
+        + lineItem.getQuantity() + ", "
+        + lineItem.getTotalAmount() + "\n";
   }
 
-  private void printSaleTax(StringBuilder output) {
-    output.append("税额").append(':').append(new DecimalFormat("#.00").format(order.getTotalSalesTax())).append("\n");
+  private String getTotalAmount() {
+    return "总价: " + new DecimalFormat("#.00").format(order.getTotalAmount()) + "\n";
   }
 
-  private void printDiscount(StringBuilder output) {
-    if (order.getTotalDiscountAmount() > 0) {
-      output.append("折扣").append(':').append(new DecimalFormat("#.00").format(order.getTotalDiscountAmount())).append("\n");
-    } else {
-      output.append((""));
-    }
+  private String getSaleTax() {
+    return "税额: " + new DecimalFormat("#.00").format(order.getTotalSalesTax()) + "\n";
+  }
+
+  private String getDiscount() {
+    return order.getTotalDiscountAmount() > 0 ? "折扣: " + new DecimalFormat("#.00")
+        .format(order.getTotalDiscountAmount()) + "\n" : "";
   }
 
 }
