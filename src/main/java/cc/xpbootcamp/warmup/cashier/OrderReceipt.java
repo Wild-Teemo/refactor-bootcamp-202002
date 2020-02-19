@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class OrderReceipt {
 
   private Order order;
+  private DecimalFormat priceFormatter = new DecimalFormat("#.00");
 
   public OrderReceipt(Order order) {
     this.order = order;
@@ -42,21 +43,21 @@ public class OrderReceipt {
 
   private String getOrderItemDetail(LineItem lineItem) {
     return lineItem.getDescription() + ", "
-        + lineItem.getPrice() + " x "
+        + priceFormatter.format(lineItem.getPrice()) + " x "
         + lineItem.getQuantity() + ", "
-        + lineItem.getTotalAmount() + "\n";
+        + priceFormatter.format(lineItem.getTotalAmount()) + "\n";
   }
 
   private String getTotalAmount() {
-    return "总价: " + new DecimalFormat("#.00").format(order.getTotalAmount()) + "\n";
+    return "总价: " + priceFormatter.format(order.getTotalAmount()) + "\n";
   }
 
   private String getSaleTax() {
-    return "税额: " + new DecimalFormat("#.00").format(order.getTotalSalesTax()) + "\n";
+    return "税额: " + priceFormatter.format(order.getTotalSalesTax()) + "\n";
   }
 
   private String getDiscount() {
-    return order.getTotalDiscount() > 0 ? "折扣: " + new DecimalFormat("#.00")
+    return order.getTotalDiscount() > 0 ? "折扣: " + priceFormatter
         .format(order.getTotalDiscount()) + "\n" : "";
   }
 
