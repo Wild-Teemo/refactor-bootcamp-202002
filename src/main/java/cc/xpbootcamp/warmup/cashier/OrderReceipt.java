@@ -8,9 +8,6 @@ package cc.xpbootcamp.warmup.cashier;
 public class OrderReceipt {
 
   private Order order;
-  private final double TAXRATE = .10;
-  double totalSaleTax = 0d;
-  double totalAmount = 0d;
 
   public OrderReceipt(Order order) {
     this.order = order;
@@ -20,11 +17,10 @@ public class OrderReceipt {
     StringBuilder output = new StringBuilder();
 
     printHeader(output);
-    // print date, bill no, customer name
-//        output.append("Date - " + order.getDate();
     printCustomerInfo(output);
-//        output.append(order.getCustomerLoyaltyNumber());
     printLineItems(output);
+    printSaleTax(output);
+    printTotalAmount(output);
     return output.toString();
   }
 
@@ -45,37 +41,17 @@ public class OrderReceipt {
       output.append('\t');
       output.append(lineItem.getQuantity());
       output.append('\t');
-      output.append(lineItem.totalAmount());
+      output.append(lineItem.getTotalAmount());
       output.append('\n');
-
-      // calculate sales tax @ rate of 10%
-      double salesTax = calculateSalesTax(lineItem);
-      totalSaleTax += salesTax;
-
-      // calculate total amount of lineItem = price * quantity + 10 % sales tax
-      totalAmount += calculateTotalAmount(lineItem, salesTax);
-
-      printStateTax(output);
-      printTotalAmount(output);
-
     }
   }
 
   private void printTotalAmount(StringBuilder output) {
-    output.append("Total Amount").append('\t').append(totalAmount);
+    output.append("Total Amount").append('\t').append(order.getTotalAmount());
   }
 
-  private void printStateTax(StringBuilder output) {
-    output.append("Sales Tax").append('\t').append(totalSaleTax);
+  private void printSaleTax(StringBuilder output) {
+    output.append("Sales Tax").append('\t').append(order.getTotalSalesTax());
   }
-
-  private double calculateTotalAmount(LineItem lineItem, double salesTax) {
-    return lineItem.totalAmount() + salesTax;
-  }
-
-  private double calculateSalesTax(LineItem lineItem) {
-    return lineItem.totalAmount() * TAXRATE;
-  }
-
 
 }

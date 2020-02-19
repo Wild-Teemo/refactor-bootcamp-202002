@@ -7,21 +7,29 @@ public class Order {
   private String customerAddress;
   private List<LineItem> lineItemList;
 
-    public Order(String customerName, String customerAddress, List<LineItem> lineItemList) {
-        this.customerName = customerName;
-        this.customerAddress = customerAddress;
-        this.lineItemList = lineItemList;
-    }
+  public Order(String customerName, String customerAddress, List<LineItem> lineItemList) {
+    this.customerName = customerName;
+    this.customerAddress = customerAddress;
+    this.lineItemList = lineItemList;
+  }
 
-    public String getCustomerName() {
-        return customerName;
-    }
+  public String getCustomerName() {
+    return customerName;
+  }
 
-    public String getCustomerAddress() {
-        return customerAddress;
-    }
+  public String getCustomerAddress() {
+    return customerAddress;
+  }
 
-    public List<LineItem> getLineItems() {
-        return lineItemList;
-    }
+  public List<LineItem> getLineItems() {
+    return lineItemList;
+  }
+
+  public double getTotalAmount() {
+    return getLineItems().stream().mapToDouble(LineItem::getTotalAmount).sum() + getTotalSalesTax();
+  }
+
+  public double getTotalSalesTax() {
+    return getLineItems().stream().mapToDouble(LineItem::getSalesTax).sum();
+  }
 }
