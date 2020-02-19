@@ -56,8 +56,8 @@ public class OrderReceipt {
   }
 
   private String getDiscount() {
-    return order.getTotalDiscountAmount() > 0 ? "折扣: " + new DecimalFormat("#.00")
-        .format(order.getTotalDiscountAmount()) + "\n" : "";
+    return order.getTotalDiscount() > 0 ? "折扣: " + new DecimalFormat("#.00")
+        .format(order.getTotalDiscount()) + "\n" : "";
   }
 
 }

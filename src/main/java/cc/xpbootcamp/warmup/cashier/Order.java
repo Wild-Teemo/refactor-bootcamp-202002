@@ -21,15 +21,15 @@ public class Order {
   }
 
   public double getTotalAmount() {
-    return getLineItems().stream().mapToDouble(LineItem::getTotalAmount).sum() + getTotalSalesTax() - getTotalDiscountAmount();
+    return getLineItems().stream().mapToDouble(LineItem::getTotalAmount).sum() + getTotalSalesTax() - getTotalDiscount();
   }
 
   public double getTotalSalesTax() {
     return getLineItems().stream().mapToDouble(LineItem::getSalesTax).sum();
   }
 
-  public double getTotalDiscountAmount() {
-    return isDiscountDay()? getLineItems().stream().mapToDouble(LineItem::getDiscountAmount).sum() : 0;
+  public double getTotalDiscount() {
+    return isDiscountDay()? getLineItems().stream().mapToDouble(LineItem::getDiscount).sum() : 0;
   }
 
   private boolean isDiscountDay() {

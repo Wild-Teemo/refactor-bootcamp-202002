@@ -34,7 +34,7 @@ public class LineItem {
     return getTotalAmount() * TAX_RATE;
   }
 
-  public double getDiscountAmount(){
+  public double getDiscount(){
     return (this.getTotalAmount() + this.getSalesTax()) * DISCOUNT_RATE;
   }
 }
