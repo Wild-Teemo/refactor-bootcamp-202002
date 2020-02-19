@@ -51,7 +51,7 @@ public class OrderReceipt {
   }
 
   private void printSaleTax(StringBuilder output) {
-    output.append("税额").append(':').append(order.getTotalSalesTax()).append("\n");
+    output.append("税额").append(':').append(new DecimalFormat("#.00").format(order.getTotalSalesTax())).append("\n");
   }
 
   private void printDiscount(StringBuilder output) {
