@@ -15,43 +15,37 @@ public class OrderReceipt {
 
   public String printReceipt() {
     StringBuilder output = new StringBuilder();
-
     printHeader(output);
-    printCustomerInfo(output);
     printLineItems(output);
+    output.append("----------------------\n");
     printSaleTax(output);
     printTotalAmount(output);
     return output.toString();
   }
 
   private void printHeader(StringBuilder output) {
-    output.append("======Printing Orders======\n");
-  }
-
-  private void printCustomerInfo(StringBuilder output) {
-    output.append(order.getCustomerName());
-    output.append(order.getCustomerAddress());
+    output.append("===== 老王超市，值得信赖 =====\n");
   }
 
   private void printLineItems(StringBuilder output) {
     for (LineItem lineItem : order.getLineItems()) {
       output.append(lineItem.getDescription());
-      output.append('\t');
+      output.append(',');
       output.append(lineItem.getPrice());
-      output.append('\t');
+      output.append('x');
       output.append(lineItem.getQuantity());
-      output.append('\t');
+      output.append(',');
       output.append(lineItem.getTotalAmount());
       output.append('\n');
     }
   }
 
   private void printTotalAmount(StringBuilder output) {
-    output.append("Total Amount").append('\t').append(order.getTotalAmount());
+    output.append("总价").append(':').append(order.getTotalAmount()).append("\n");
   }
 
   private void printSaleTax(StringBuilder output) {
-    output.append("Sales Tax").append('\t').append(order.getTotalSalesTax());
+    output.append("税额").append(':').append(order.getTotalSalesTax()).append("\n");
   }
 
 }
