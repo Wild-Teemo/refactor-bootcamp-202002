@@ -4,10 +4,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Order {
+
+  private static final double DISCOUNT_RATE = 0.02;
   private List<LineItem> lineItemList;
   private LocalDate createDate;
 
-  public Order(List<LineItem> lineItemList,LocalDate createDate) {
+  public Order(List<LineItem> lineItemList, LocalDate createDate) {
     this.lineItemList = lineItemList;
     this.createDate = createDate;
   }
@@ -21,7 +23,12 @@ public class Order {
   }
 
   public double getTotalAmount() {
-    return getLineItems().stream().mapToDouble(LineItem::getTotalAmount).sum() + getTotalSalesTax() - getTotalDiscount();
+    return getLineItems().stream().mapToDouble(LineItem::getTotalAmount).sum();
+  }
+
+  public double getTotalAmountIncludeTaxAndDiscount() {
+    return getLineItems().stream().mapToDouble(LineItem::getTotalAmount).sum() + getTotalSalesTax()
+        - getTotalDiscount();
   }
 
   public double getTotalSalesTax() {
@@ -29,7 +36,7 @@ public class Order {
   }
 
   public double getTotalDiscount() {
-    return isDiscountDay()? getLineItems().stream().mapToDouble(LineItem::getDiscount).sum() : 0;
+    return isDiscountDay() ? (getTotalSalesTax() + getTotalAmount()) * DISCOUNT_RATE : 0;
   }
 
   private boolean isDiscountDay() {

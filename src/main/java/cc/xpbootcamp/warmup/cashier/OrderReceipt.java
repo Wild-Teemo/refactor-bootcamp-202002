@@ -49,7 +49,7 @@ public class OrderReceipt {
   }
 
   private String getTotalAmount() {
-    return "总价: " + priceFormatter.format(order.getTotalAmount()) + "\n";
+    return "总价: " + priceFormatter.format(order.getTotalAmountIncludeTaxAndDiscount()) + "\n";
   }
 
   private String getSaleTax() {
