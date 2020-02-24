@@ -27,8 +27,7 @@ public class Order {
   }
 
   public double getTotalAmountIncludeTaxAndDiscount() {
-    return getLineItems().stream().mapToDouble(LineItem::getTotalAmount).sum() + getTotalSalesTax()
-        - getTotalDiscount();
+    return getTotalAmount() + getTotalSalesTax() - getTotalDiscount();
   }
 
   public double getTotalSalesTax() {
