@@ -6,6 +6,7 @@ import java.util.List;
 public class Order {
 
   private static final double DISCOUNT_RATE = 0.02;
+  private static final int DISCOUNT_DAY = 3;
   private List<LineItem> lineItemList;
   private LocalDate createDate;
 
@@ -39,7 +40,7 @@ public class Order {
   }
 
   private boolean isDiscountDay() {
-    return createDate.getDayOfWeek().getValue() == 3;
+    return createDate.getDayOfWeek().getValue() == DISCOUNT_DAY;
   }
 
 }
